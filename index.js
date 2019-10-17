@@ -10,8 +10,8 @@ const { body, check } = require('express-validator')
 
 const app = express()
 
-const bookdb = require('./bookQueries')
-const userdb = require('./userQueries')
+// const bookdb = require('./bookQueries')
+// const userdb = require('./userQueries')
 const cmntdb = require('./commentQueries')
 
 const port = 3000
@@ -45,32 +45,32 @@ app.get('/', (request, response) => {
   response.json({ info: 'Node.js, Express, and Postgres API' })
 })
 
-// Books
-app.get('/books', bookdb.getBooks)
-app.post('/books',
-  [
-    check('author')
-      .not()
-      .isEmpty()
-      .isLength({ min: 5, max: 255 })
-      .trim(),
-    check('title')
-      .not()
-      .isEmpty()
-      .isLength({ min: 5, max: 255 })
-      .trim(),
-  ],
-  postLimiter,
-  bookdb.addBook
-)
-app.delete('/books', bookdb.deleteBook)
+// // Books
+// app.get('/books', bookdb.getBooks)
+// app.post('/books',
+//   [
+//     check('author')
+//       .not()
+//       .isEmpty()
+//       .isLength({ min: 5, max: 255 })
+//       .trim(),
+//     check('title')
+//       .not()
+//       .isEmpty()
+//       .isLength({ min: 5, max: 255 })
+//       .trim(),
+//   ],
+//   postLimiter,
+//   bookdb.addBook
+// )
+// app.delete('/books', bookdb.deleteBook)
 
-// Users
-app.get('/users', userdb.getUsers)
-app.get('/users/:id', userdb.getUserById)
-app.post('/users', userdb.createUser)
-app.put('/users/:id', userdb.updateUser)
-app.delete('/users/:id', userdb.deleteUser)
+// // Users
+// app.get('/users', userdb.getUsers)
+// app.get('/users/:id', userdb.getUserById)
+// app.post('/users', userdb.createUser)
+// app.put('/users/:id', userdb.updateUser)
+// app.delete('/users/:id', userdb.deleteUser)
 
 // Comments
 app.get('/comments', cmntdb.getComments)
